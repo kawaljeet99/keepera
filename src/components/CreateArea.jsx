@@ -8,6 +8,7 @@ function CreateArea(props) {
     title: "",
     content: "",
   });
+
   const [hasInput, setHasInput] = useState(false);
 
   function handleChange(event) {
@@ -23,12 +24,16 @@ function CreateArea(props) {
 
   function submitNote(event) {
     event.preventDefault();
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: "",
-    });
-    setHasInput(false);
+    if (!note.title || !note.content) {
+      alert("Inputs cannot be empty.");
+    } else {
+      props.onAdd(note);
+      setNote({
+        title: "",
+        content: "",
+      });
+      setHasInput(false);
+    }
   }
 
   return (
